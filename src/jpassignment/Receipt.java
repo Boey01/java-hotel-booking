@@ -1,0 +1,661 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jpassignment;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
+/**
+ *
+ * @author devil
+ */
+public class Receipt extends javax.swing.JFrame {
+private List<String> bkid = new ArrayList<>();
+private List<String> custname = new ArrayList<>();
+private List<String> email = new ArrayList<>();
+private List<String> icnumber = new ArrayList<>();
+private List<String> contactnumber = new ArrayList<>();
+private List<String> startdate = new ArrayList<>();
+private List<String> enddate = new ArrayList<>();
+private List<String> roomnumber = new ArrayList<>();
+
+private List<String> servicetax = new ArrayList<>();
+private List<String> tourismtax = new ArrayList<>();
+private List<String> totalcharge = new ArrayList<>();
+private List<String> payamount = new ArrayList<>();
+private List<String> changeamount = new ArrayList<>();
+private String bookid,tc,pa,ca;   /**
+     * Creates new form Receipt
+     */
+    public Receipt() {
+        initComponents();
+               
+         
+         File file2 = new File("receipt.txt");
+         
+         try{
+            
+            Scanner inputFile2 = new Scanner(file2);
+            while (inputFile2.hasNext()){
+                inputFile2.nextLine();               
+                
+                String st = inputFile2.nextLine();
+                if (st !=null)servicetax.add(st);
+                
+                String tt = inputFile2.nextLine();
+                if (tt !=null)tourismtax.add(tt);
+                
+                tc = inputFile2.nextLine();
+                if (tc !=null)totalcharge.add(tc);
+                
+                pa = inputFile2.nextLine();
+                if (pa !=null)payamount.add(pa);
+                
+                ca = inputFile2.nextLine();
+                if (ca !=null)changeamount.add(ca);
+                
+                bookid = inputFile2.nextLine();
+                if (bookid !=null) {
+                bkid.add(bookid);
+                this.findFromBooking(bookid);
+                }  
+           inputFile2.nextLine();        
+                
+            }
+            
+            inputFile2.close();
+         } catch (FileNotFoundException ex){
+             JOptionPane.showMessageDialog(null,"There is no records, feel free to create one.");
+             System.out.println(ex);
+         }
+    }
+
+    private void findFromBooking(String b){
+              try{
+            File file = new File("booking.txt");
+            Scanner inputFile = new Scanner(file);
+            
+            while (inputFile.hasNext()){
+                if (inputFile.nextLine().equals(b)){                               
+                String name =  inputFile.nextLine();
+                if (name !=null)custname.add(name);
+                
+                String em = inputFile.nextLine();
+                if (em !=null)email.add(em);
+                
+                String icnum = inputFile.nextLine();
+                if (icnum !=null)icnumber.add(icnum);
+                
+                String contactnum = inputFile.nextLine();
+                if (contactnum !=null)contactnumber.add(contactnum);
+                
+                String date1 = inputFile.nextLine();
+                if (date1 !=null)startdate.add(date1);
+                
+                String date2 = inputFile.nextLine();
+                if (date2 !=null)enddate.add(date2);
+                
+                String room = inputFile.nextLine();
+                if (room !=null)roomnumber.add(room);   
+                
+                inputFile.nextLine();
+                DefaultTableModel model = (DefaultTableModel)tbReceipt.getModel();
+                model.addRow(new Object[]{bookid,name,room,tc,pa,ca});
+                }else 
+                {
+                   inputFile.nextLine();
+                   inputFile.nextLine();
+                   inputFile.nextLine();
+                   inputFile.nextLine();
+                   inputFile.nextLine();
+                   inputFile.nextLine();
+                   inputFile.nextLine();
+                   
+                   inputFile.nextLine();
+                }
+            }
+            inputFile.close();
+         }catch (FileNotFoundException ex){
+             JOptionPane.showMessageDialog(null,"There is no records, feel free to create one.");
+             System.out.println(ex);
+         }
+      
+    }
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        dateChooserDialog1 = new datechooser.beans.DateChooserDialog();
+        dateChooserDialog2 = new datechooser.beans.DateChooserDialog();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbReceipt = new javax.swing.JTable();
+        txtSearch_RP = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txtName = new javax.swing.JTextField();
+        lbEmail = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JTextField();
+        lbName1 = new javax.swing.JLabel();
+        txtIC = new javax.swing.JTextField();
+        lbName2 = new javax.swing.JLabel();
+        txtNumber = new javax.swing.JTextField();
+        lbName = new javax.swing.JLabel();
+        txtStartDate = new javax.swing.JTextField();
+        lbName6 = new javax.swing.JLabel();
+        lbName7 = new javax.swing.JLabel();
+        txtEndDate = new javax.swing.JTextField();
+        lbName4 = new javax.swing.JLabel();
+        lbDOS = new javax.swing.JLabel();
+        lbRoomID = new javax.swing.JLabel();
+        lbName8 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        lbEmail1 = new javax.swing.JLabel();
+        lbEmail2 = new javax.swing.JLabel();
+        txtTourismTax = new javax.swing.JTextField();
+        lbEmail3 = new javax.swing.JLabel();
+        txtTotalCharge = new javax.swing.JTextField();
+        txtServiceTax = new javax.swing.JTextField();
+        lbName9 = new javax.swing.JLabel();
+        lbBookID = new javax.swing.JLabel();
+        lbEmail4 = new javax.swing.JLabel();
+        lbEmail5 = new javax.swing.JLabel();
+        txtPay = new javax.swing.JTextField();
+        txtChange = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+
+        jLabel1.setFont(new java.awt.Font("Yu Gothic Medium", 0, 24)); // NOI18N
+        jLabel1.setText("Receipts");
+
+        tbReceipt.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Booking ID", "Name", "Room", "Total Charge", "Pay", "Change"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbReceipt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbReceiptMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tbReceipt);
+
+        txtSearch_RP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearch_RPActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Yu Gothic", 1, 12)); // NOI18N
+        jLabel2.setText("Customer Details");
+
+        jLabel3.setFont(new java.awt.Font("Yu Gothic", 1, 12)); // NOI18N
+        jLabel3.setText("Room Details");
+
+        txtName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNameActionPerformed(evt);
+            }
+        });
+
+        lbEmail.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        lbEmail.setText("Email");
+
+        txtEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmailActionPerformed(evt);
+            }
+        });
+
+        lbName1.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        lbName1.setText("IC/Passport");
+
+        txtIC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtICActionPerformed(evt);
+            }
+        });
+
+        lbName2.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        lbName2.setText("Contact Number");
+
+        txtNumber.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNumberActionPerformed(evt);
+            }
+        });
+
+        lbName.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        lbName.setText("Name");
+
+        txtStartDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtStartDateActionPerformed(evt);
+            }
+        });
+
+        lbName6.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        lbName6.setForeground(new java.awt.Color(55, 55, 55));
+        lbName6.setText("From");
+
+        lbName7.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        lbName7.setForeground(new java.awt.Color(55, 55, 55));
+        lbName7.setText("To");
+
+        txtEndDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEndDateActionPerformed(evt);
+            }
+        });
+
+        lbName4.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        lbName4.setText("Days of stays:");
+
+        lbDOS.setText("D.O.S");
+
+        lbRoomID.setText("ID");
+
+        lbName8.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        lbName8.setForeground(new java.awt.Color(55, 55, 55));
+        lbName8.setText("Room :");
+
+        jButton1.setBackground(new java.awt.Color(204, 204, 204));
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        lbEmail1.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        lbEmail1.setText("Services Tax");
+
+        lbEmail2.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        lbEmail2.setText("Tourism Tax");
+
+        txtTourismTax.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTourismTaxActionPerformed(evt);
+            }
+        });
+
+        lbEmail3.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        lbEmail3.setText("Total Charges");
+
+        txtTotalCharge.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTotalChargeActionPerformed(evt);
+            }
+        });
+
+        txtServiceTax.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtServiceTaxActionPerformed(evt);
+            }
+        });
+
+        lbName9.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        lbName9.setForeground(new java.awt.Color(55, 55, 55));
+        lbName9.setText("Booking ID:");
+
+        lbBookID.setText("ID");
+
+        lbEmail4.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        lbEmail4.setText("Pay:");
+
+        lbEmail5.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        lbEmail5.setText("Change:");
+
+        txtPay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPayActionPerformed(evt);
+            }
+        });
+
+        txtChange.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtChangeActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Search :");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbName, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtIC, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbName1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbName2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lbName9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbBookID)))
+                        .addGap(78, 78, 78)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lbName7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txtEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lbName6)
+                                        .addGap(28, 28, 28)
+                                        .addComponent(txtStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel3)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(lbName8)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(lbRoomID)
+                                            .addGap(12, 12, 12))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbEmail1)
+                                    .addComponent(lbEmail2))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtServiceTax, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtTourismTax, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(26, 26, 26))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtTotalCharge, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(lbEmail3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(lbName4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lbDOS)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtPay, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 20, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(21, 21, 21)
+                                        .addComponent(lbEmail4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(71, 71, 71)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbEmail5, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtChange, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel1)
+                            .addComponent(txtSearch_RP, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel1)
+                .addGap(1, 1, 1)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtSearch_RP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbName)
+                            .addComponent(lbEmail))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lbName2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbName1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtIC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbBookID)
+                            .addComponent(lbName9))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lbRoomID)
+                                    .addComponent(lbName8, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lbName6, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbEmail1)
+                                    .addComponent(txtServiceTax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lbName7)
+                                    .addComponent(txtEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(43, 43, 43)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbEmail2)
+                                    .addComponent(txtTourismTax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbName4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbDOS))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbEmail3)
+                            .addComponent(lbEmail4)
+                            .addComponent(lbEmail5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtTotalCharge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtChange, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
+
+        pack();
+        setLocationRelativeTo(null);
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void txtSearch_RPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearch_RPActionPerformed
+DefaultTableModel model = (DefaultTableModel) tbReceipt.getModel();
+TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
+tr.setRowFilter(RowFilter.regexFilter(txtSearch_RP.getText().trim())); 
+tbReceipt.setRowSorter(tr);
+       // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearch_RPActionPerformed
+
+    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNameActionPerformed
+
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEmailActionPerformed
+
+    private void txtICActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtICActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtICActionPerformed
+
+    private void txtNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumberActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNumberActionPerformed
+
+    private void txtStartDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStartDateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtStartDateActionPerformed
+
+    private void txtEndDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEndDateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEndDateActionPerformed
+
+    private void txtTourismTaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTourismTaxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTourismTaxActionPerformed
+
+    private void txtTotalChargeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalChargeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTotalChargeActionPerformed
+
+    private void txtServiceTaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtServiceTaxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtServiceTaxActionPerformed
+
+    private void txtPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPayActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPayActionPerformed
+
+    private void txtChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtChangeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtChangeActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    new StaffMain().setVisible(true);
+    this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tbReceiptMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbReceiptMouseClicked
+        try{
+            int row = tbReceipt.getSelectedRow();
+            String clicked_id = (tbReceipt.getModel().getValueAt(row,0).toString());
+            int n = bkid.size();
+            int recordcounter;
+            for(int i = 0; i < n; i++){
+            if (bkid.get(i) == clicked_id){
+                recordcounter = i;
+                lbBookID.setText(clicked_id);
+                txtName.setText(custname.get(recordcounter));
+                txtEmail.setText(email.get(recordcounter));
+                txtIC.setText(icnumber.get(recordcounter));
+                txtNumber.setText(contactnumber.get(recordcounter));
+                txtStartDate.setText(startdate.get(recordcounter));
+                txtEndDate.setText(enddate.get(recordcounter));
+                lbRoomID.setText(roomnumber.get(recordcounter));
+                txtServiceTax.setText(servicetax.get(recordcounter));
+                txtTourismTax.setText(tourismtax.get(recordcounter));
+                txtTotalCharge.setText(totalcharge.get(recordcounter));
+                txtPay.setText(payamount.get(recordcounter));
+                txtChange.setText(changeamount.get(recordcounter));
+                
+                LocalDate a = LocalDate.parse(startdate.get(recordcounter));
+                LocalDate b = LocalDate.parse(enddate.get(recordcounter));
+                long stayofdays = ChronoUnit.DAYS.between(a, b);
+                String days = Long.toString(stayofdays);
+                lbDOS.setText(days);
+            }
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,e);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_tbReceiptMouseClicked
+
+    /**
+     * @param args the command line arguments
+     */
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private datechooser.beans.DateChooserDialog dateChooserDialog1;
+    private datechooser.beans.DateChooserDialog dateChooserDialog2;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbBookID;
+    private javax.swing.JLabel lbDOS;
+    private javax.swing.JLabel lbEmail;
+    private javax.swing.JLabel lbEmail1;
+    private javax.swing.JLabel lbEmail2;
+    private javax.swing.JLabel lbEmail3;
+    private javax.swing.JLabel lbEmail4;
+    private javax.swing.JLabel lbEmail5;
+    private javax.swing.JLabel lbName;
+    private javax.swing.JLabel lbName1;
+    private javax.swing.JLabel lbName2;
+    private javax.swing.JLabel lbName4;
+    private javax.swing.JLabel lbName6;
+    private javax.swing.JLabel lbName7;
+    private javax.swing.JLabel lbName8;
+    private javax.swing.JLabel lbName9;
+    private javax.swing.JLabel lbRoomID;
+    private javax.swing.JTable tbReceipt;
+    private javax.swing.JTextField txtChange;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtEndDate;
+    private javax.swing.JTextField txtIC;
+    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtNumber;
+    private javax.swing.JTextField txtPay;
+    private javax.swing.JTextField txtSearch_RP;
+    private javax.swing.JTextField txtServiceTax;
+    private javax.swing.JTextField txtStartDate;
+    private javax.swing.JTextField txtTotalCharge;
+    private javax.swing.JTextField txtTourismTax;
+    // End of variables declaration//GEN-END:variables
+}
